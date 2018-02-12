@@ -19,6 +19,12 @@ android {
     }
 }
 
+repluginHostConfig {
+    /*支持AppCompat库*/
+    useAppCompat = true
+}
+
+
 dependencies {
     /*添加 RePlugin Host Library 依赖*/
     compile 'com.qihoo360.replugin:replugin-host-lib:2.2.2'
