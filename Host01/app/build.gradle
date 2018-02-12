@@ -27,6 +27,7 @@ repluginHostConfig {
 
 dependencies {
     /*添加 RePlugin Host Library 依赖*/
+    implementation 'com.android.support:design:26.1.0'
     compile 'com.qihoo360.replugin:replugin-host-lib:2.2.2'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Host01</string>
+    <string name="title_activity_second">Host01_SecondActivity</string>
 </resources>
