@@ -23,4 +23,8 @@
         android:id="@+id/btn_start_host01_second_activity"
         style="@style/ButtonStyle"
         android:text="start_host01_second_activity"/>
+    <Button
+        android:id="@+id/btn_start_for_result_activity"
+        style="@style/ButtonStyle"
+        android:text="start_for_result_activity"/>
 </LinearLayout>

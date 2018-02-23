@@ -27,6 +27,7 @@ repluginPluginConfig {
 }
 
 dependencies {
+    implementation 'com.android.support:design:26.1.0'
     compile 'com.qihoo360.replugin:replugin-plugin-lib:2.2.2'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

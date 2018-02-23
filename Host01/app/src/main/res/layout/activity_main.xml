@@ -35,7 +35,13 @@
             style="@style/ButtonStyle"
             android:text="start plugin01"
             />
-        
+
+        <Button
+            android:id="@+id/btn_start_plugin01_for_result"
+            style="@style/ButtonStyle"
+            android:text="start plugin01 for result"
+            />
+
         <Button
             android:id="@+id/btn_start_send_activity"
             style="@style/ButtonStyle"

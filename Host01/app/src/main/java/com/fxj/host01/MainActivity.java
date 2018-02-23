@@ -35,6 +35,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.btn_start_plugin01_for_result).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                /*通过startActivityForResult的方式启动插件的Activity*/
+                RePlugin.startActivityForResult(MainActivity.this,RePlugin.createIntent("plugin01",
+                        "com.fxj.replugintest01_plugin01.ForResultActivity"),0x01);
+            }
+        });
+
         findViewById(R.id.btn_start_send_activity).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -43,5 +52,12 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==0x01&&resultCode==0x71){
+            Toast.makeText(this,"data:"+data.getStringExtra("data"),Toast.LENGTH_LONG).show();
+        }
     }
 }
