@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.qihoo360.replugin.RePlugin;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -19,7 +21,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent();
-                intent.setComponent(new ComponentName("com.fxj.host01","com.fxj.host01.SecondActivity"));
+                intent.setComponent(new ComponentName(RePlugin.getHostContext().getPackageName(),"com.fxj.host01.SecondActivity"));
                 startActivity(intent);
             }
         });

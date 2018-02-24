@@ -12,7 +12,7 @@ public class ForResultActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_for_result);
 
-        findViewById(R.id.btn_return).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent data=new Intent();
