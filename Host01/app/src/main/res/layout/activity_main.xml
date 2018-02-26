@@ -58,6 +58,11 @@
                 android:id="@+id/btn_start_plugin01_service01"
                 style="@style/ButtonStyle"
                 android:text="start plugin01 service01"/>
+
+            <Button
+                android:id="@+id/btn_bind_plugin01_service01"
+                style="@style/ButtonStyle"
+                android:text="bind plugin01 service01"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -33,4 +33,10 @@ public class Plugin01Service_01 extends Service {
         Log.d(TAG,"Plugin01Service_01.onBind");
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(TAG,"Plugin01Service_01.onUnbind");
+        return super.onUnbind(intent);
+    }
 }
