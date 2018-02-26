@@ -19,12 +19,27 @@
         android:scaleType="fitCenter"
         android:src="@drawable/pic01"/>
 
-    <Button
-        android:id="@+id/btn_start_host01_second_activity"
-        style="@style/ButtonStyle"
-        android:text="start_host01_second_activity"/>
-    <Button
-        android:id="@+id/btn_start_for_result_activity"
-        style="@style/ButtonStyle"
-        android:text="start_for_result_activity"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_start_host01_second_activity"
+                style="@style/ButtonStyle"
+                android:text="start_host01_second_activity"/>
+            <Button
+                android:id="@+id/btn_start_for_result_activity"
+                style="@style/ButtonStyle"
+                android:text="start_for_result_activity"/>
+
+            <Button
+                android:id="@+id/btn_start_plugin01_service01"
+                style="@style/ButtonStyle"
+                android:text="start_plugin01_service01"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

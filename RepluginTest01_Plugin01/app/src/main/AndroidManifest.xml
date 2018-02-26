@@ -23,6 +23,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <service android:name=".Plugin01Service_01">
+            <intent-filter>
+                <action android:name="Plugin01Service_01.action"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

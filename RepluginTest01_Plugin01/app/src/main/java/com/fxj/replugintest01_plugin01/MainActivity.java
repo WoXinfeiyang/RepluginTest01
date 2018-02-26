@@ -34,5 +34,14 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        findViewById(R.id.btn_start_plugin01_service01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,Plugin01Service_01.class);
+                intent.setAction("Plugin01Service_01.action");
+                startService(intent);
+            }
+        });
     }
 }
