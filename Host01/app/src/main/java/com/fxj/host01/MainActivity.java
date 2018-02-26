@@ -1,13 +1,16 @@
 package com.fxj.host01;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -116,6 +119,26 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        findViewById(R.id.btn_use_layout_from_plugin01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Resources res=RePlugin.fetchResources("plugin01");/*获取插件的Resources对象*/
+                /*从Resources对象中获取资源文件Id,注意使用Resources.getIdentifier方法时传入参数的格式*/
+                int resId=res.getIdentifier("com.fxj.replugintest01_plugin01:layout/layout_from_plugin01",null,null);
+                if(resId==0){
+                    Toast.makeText(MainActivity.this,"插件中的资源文件不存在",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                /*通过布局加载器得到View对象*/
+                View contentView=LayoutInflater.from(RePlugin.fetchContext("plugin01")).inflate(resId,null);
+
+                Dialog dialog=new Dialog(MainActivity.this);
+                dialog.setContentView(contentView);
+                dialog.show();
+            }
+        });
+
 
     }
 

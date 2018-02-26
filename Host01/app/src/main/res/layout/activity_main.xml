@@ -69,6 +69,10 @@
                 style="@style/ButtonStyle"
                 android:text="调用插件中的方法"/>
 
+            <Button
+                android:id="@+id/btn_use_layout_from_plugin01"
+                style="@style/ButtonStyle"
+                android:text="use plugin01's layout"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
