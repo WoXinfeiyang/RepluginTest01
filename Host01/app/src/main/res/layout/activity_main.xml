@@ -63,6 +63,12 @@
                 android:id="@+id/btn_bind_plugin01_service01"
                 style="@style/ButtonStyle"
                 android:text="bind plugin01 service01"/>
+
+            <Button
+                android:id="@+id/btn_use_plugin01_method"
+                style="@style/ButtonStyle"
+                android:text="调用插件中的方法"/>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.service.PluginServiceClient;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class MainActivity extends Activity {
 
     private String TAG="Host01_MainActivity_fxj0212";
@@ -86,6 +89,33 @@ public class MainActivity extends Activity {
             }
         });
 
+
+        findViewById(R.id.btn_use_plugin01_method).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClassLoader classLoader=RePlugin.fetchClassLoader("plugin01");/*获取插件的ClassLoader*/
+
+                if(classLoader==null){
+                    Toast.makeText(MainActivity.this,"not install plugin01",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                try {
+                    Class clz =classLoader.loadClass("com.fxj.replugintest01_plugin01.Plugin01Utils");
+                    Method showMsgMethod=clz.getDeclaredMethod("showMsg",Context.class,String.class);
+                    showMsgMethod.invoke(null,MainActivity.this,"宿主调用插件Plugin01中的方法");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
     }
 
