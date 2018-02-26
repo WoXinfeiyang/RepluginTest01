@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.qihoo360.replugin.RePlugin;
+import com.qihoo360.replugin.component.service.PluginServiceClient;
 
 public class MainActivity extends Activity {
 
@@ -49,6 +50,15 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,SecondActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_start_plugin01_service01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=RePlugin.createIntent("plugin01","com.fxj.replugintest01_plugin01.Plugin01Service_01");
+                intent.setAction("Plugin01Service_01.action");
+                PluginServiceClient.startService(MainActivity.this,intent);
             }
         });
 

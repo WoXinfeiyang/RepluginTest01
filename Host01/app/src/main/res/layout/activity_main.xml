@@ -25,28 +25,39 @@
         android:scaleType="fitCenter"
         android:src="@drawable/picture01" />
 
-    <LinearLayout
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_picture01"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_start_plugin01"
-            style="@style/ButtonStyle"
-            android:text="start plugin01"
-            />
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_picture01">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_picture01"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_start_plugin01_for_result"
-            style="@style/ButtonStyle"
-            android:text="start plugin01 for result"
-            />
+            <Button
+                android:id="@+id/btn_start_plugin01"
+                style="@style/ButtonStyle"
+                android:text="start plugin01"
+                />
 
-        <Button
-            android:id="@+id/btn_start_send_activity"
-            style="@style/ButtonStyle"
-            android:text="start Host01 SecondActivity"/>
+            <Button
+                android:id="@+id/btn_start_plugin01_for_result"
+                style="@style/ButtonStyle"
+                android:text="start plugin01 for result"
+                />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_start_send_activity"
+                style="@style/ButtonStyle"
+                android:text="start Host01 SecondActivity"/>
 
+            <Button
+                android:id="@+id/btn_start_plugin01_service01"
+                style="@style/ButtonStyle"
+                android:text="start plugin01 service01"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
