@@ -2,22 +2,28 @@ package com.fxj.host01;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.service.PluginServiceClient;
+import com.qihoo360.replugin.model.PluginInfo;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -26,6 +32,8 @@ public class MainActivity extends Activity {
     private String TAG="Host01_MainActivity_fxj0212";
     private ServiceConnection conn;
 
+
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +147,59 @@ public class MainActivity extends Activity {
             }
         });
 
+        final String plugin02Name="plugin02.apk";
+
+        findViewById(R.id.btn_install_plugin02_from_sd).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                pluginInfo = RePlugin.install("/sdcard/plugin02.apk");
+//                Log.d(TAG,"PluginInfo="+ pluginInfo);
+                final ProgressDialog pd=ProgressDialog.show(MainActivity.this,"Install……","Please waite……",true,true);
+
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        installExternalPluginFromSDCard(Environment.getExternalStorageDirectory().getAbsolutePath(),"plugin02.apk");
+                        pd.dismiss();
+                    }
+                }, 1000);
+
+            }
+        });
+
+        findViewById(R.id.btn_start_plugin02).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RePlugin.startActivity(MainActivity.this,RePlugin.createIntent(/*pluginInfo!=null?pluginInfo.getName():*/"com.fxj.replugintest01_plugin02","com.fxj.replugintest01_plugin02.MainActivity"));
+            }
+        });
+
+    }
+
+    private void installExternalPluginFromSDCard(String filePath,String fileName){
+        if(TextUtils.isEmpty(filePath)||TextUtils.isEmpty(fileName)){
+            Toast.makeText(MainActivity.this,"参数错误!",Toast.LENGTH_LONG).show();
+        }
+        Log.d(TAG,"filePath="+filePath+",fileName="+fileName);
+        String apkFilePath=filePath+File.separator+fileName;
+        File apkFile=new File(apkFilePath);
+        if(!apkFile.exists()){
+            String msg="在SD卡上的apk文件不存在!";
+            Log.d(TAG,msg);
+            Toast.makeText(MainActivity.this,msg,Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        PluginInfo info =RePlugin.install(apkFile.getAbsolutePath());
+        if(info!=null){
+            Log.d(TAG,"外置插件安装成功!APK存放目录:"+info.getApkDir()+",APK存放的文件信息:"+info.getApkFile());
+            Toast.makeText(MainActivity.this,"外置插件安装成功!",Toast.LENGTH_LONG).show();
+        }else if(info==null){
+            Log.d(TAG,"外置插件安装失败!");
+            Toast.makeText(MainActivity.this,"外置插件安装失败!",Toast.LENGTH_LONG).show();
+            return;
+        }
 
     }
 

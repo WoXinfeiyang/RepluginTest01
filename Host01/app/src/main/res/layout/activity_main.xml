@@ -73,6 +73,16 @@
                 android:id="@+id/btn_use_layout_from_plugin01"
                 style="@style/ButtonStyle"
                 android:text="use plugin01's layout"/>
+
+            <Button
+                android:id="@+id/btn_install_plugin02_from_sd"
+                style="@style/ButtonStyle"
+                android:text="install plugin02 from SDCard"/>
+
+            <Button
+                android:id="@+id/btn_start_plugin02"
+                style="@style/ButtonStyle"
+                android:text="start plugin02"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

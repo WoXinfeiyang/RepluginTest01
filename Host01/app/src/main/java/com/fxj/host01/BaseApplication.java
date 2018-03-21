@@ -40,6 +40,8 @@ public class BaseApplication extends RePluginApplication {
         /*添加插件化框架对外事件的回调接口*/
         c.setEventCallbacks(new HostEventCallbacks(this));
 
+        /*设置安装外置插件的时候是否移动源插件文件,true为允许移动*/
+        c.setMoveFileWhenInstalling(false);
         return c;
     }
 
