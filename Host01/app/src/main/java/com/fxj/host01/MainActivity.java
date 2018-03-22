@@ -24,6 +24,9 @@ import com.qihoo360.replugin.component.service.PluginServiceClient;
 import com.qihoo360.replugin.model.PluginInfo;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -33,7 +36,7 @@ public class MainActivity extends Activity {
     private ServiceConnection conn;
 
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,13 +171,76 @@ public class MainActivity extends Activity {
             }
         });
 
-        findViewById(R.id.btn_start_plugin02).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_install_plugin03_from_assets).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RePlugin.startActivity(MainActivity.this,RePlugin.createIntent(/*pluginInfo!=null?pluginInfo.getName():*/"com.fxj.replugintest01_plugin02","com.fxj.replugintest01_plugin02.MainActivity"));
+                final ProgressDialog pd=ProgressDialog.show(MainActivity.this,"Install……","please waite……",true,true);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        installExternalPluginFromAssets("external","plugin03.apk");
+                        pd.dismiss();
+                    }
+                }, 1000);
             }
         });
 
+    }
+
+    /**
+     * 从assets文件夹下安装外置插件
+     * @param assetsChildFolderName assets文件夹下子目录名称
+     * @param apkFileName 外置插件apk文件名称
+     * */
+    private void installExternalPluginFromAssets(String assetsChildFolderName,String apkFileName){
+        /*在应用程序/data/data/package_name/files/文件夹下的插件文件路径*/
+        String pluginFileInDataFolderPath=getFilesDir().getAbsolutePath()+File.separator+apkFileName;
+        File pluginFileInData=new File(pluginFileInDataFolderPath);
+        if(pluginFileInData.exists()){
+            pluginFileInData.delete();
+        }
+
+        String assetsFilePath=assetsChildFolderName+File.separator+apkFileName;
+        copyAssetsFileToAppFile(assetsFilePath,apkFileName);
+        if(pluginFileInData.exists()){
+            Log.d(TAG,"已经成功将Assets文件夹下的插件apk文件复制到应用程序数据文件夹下!");
+             PluginInfo info =RePlugin.install(pluginFileInDataFolderPath);
+             if(info!=null){
+                 Log.d(TAG,"位于Assets文件夹下的外置插件apk文件安装成功!PluginInfo:"+info);
+                 Toast.makeText(MainActivity.this,"位于Assets文件夹下的外置插件apk文件安装成功!",Toast.LENGTH_SHORT).show();
+                 RePlugin.startActivity(MainActivity.this,RePlugin.createIntent("plugin03","com.fxj.replugintest01_plugin03.MainActivity"));
+             }else{
+                 Log.d(TAG,"位于Assets文件夹下的外置插件apk文件安装失败!");
+                 Toast.makeText(MainActivity.this,"位于Assets文件夹下的外置插件apk文件安装失败!",Toast.LENGTH_SHORT).show();
+             }
+        }else{
+            Log.d(TAG,"复制失败!");
+        }
+    }
+
+    private void copyAssetsFileToAppFile(String assetsFilePath,String fileNameInData){
+        InputStream is=null;
+        FileOutputStream fos=null;
+        int bufferSize=1024;
+        try {
+            is= getAssets().open(assetsFilePath);
+            fos=openFileOutput(fileNameInData,MODE_PRIVATE);
+            byte[] buffer=new byte[bufferSize];
+            int byteCount=0;
+            while((byteCount=is.read(buffer))!=-1){
+                fos.write(buffer,0,byteCount);
+            }
+            fos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                is.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void installExternalPluginFromSDCard(String filePath,String fileName){
@@ -193,11 +259,12 @@ public class MainActivity extends Activity {
 
         PluginInfo info =RePlugin.install(apkFile.getAbsolutePath());
         if(info!=null){
-            Log.d(TAG,"外置插件安装成功!APK存放目录:"+info.getApkDir()+",APK存放的文件信息:"+info.getApkFile());
-            Toast.makeText(MainActivity.this,"外置插件安装成功!",Toast.LENGTH_LONG).show();
+            Log.d(TAG,"SD卡中外置插件安装成功!APK存放目录:"+info.getApkDir()+",APK存放的文件信息:"+info.getApkFile()+",PluginInfo:"+info);
+            Toast.makeText(MainActivity.this,"外置插件安装成功!",Toast.LENGTH_SHORT).show();
+            RePlugin.startActivity(MainActivity.this,RePlugin.createIntent("plugin02","com.fxj.replugintest01_plugin02.MainActivity"));
         }else if(info==null){
-            Log.d(TAG,"外置插件安装失败!");
-            Toast.makeText(MainActivity.this,"外置插件安装失败!",Toast.LENGTH_LONG).show();
+            Log.d(TAG,"SD卡外置插件安装失败!");
+            Toast.makeText(MainActivity.this,"SD卡外置插件安装失败!",Toast.LENGTH_SHORT).show();
             return;
         }
 

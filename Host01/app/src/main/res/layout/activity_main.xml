@@ -80,9 +80,9 @@
                 android:text="install plugin02 from SDCard"/>
 
             <Button
-                android:id="@+id/btn_start_plugin02"
+                android:id="@+id/btn_install_plugin03_from_assets"
                 style="@style/ButtonStyle"
-                android:text="start plugin02"/>
+                android:text="install plugin03 from assets"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

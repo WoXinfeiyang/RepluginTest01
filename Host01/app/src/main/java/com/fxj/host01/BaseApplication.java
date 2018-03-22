@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginApplication;
@@ -42,6 +43,8 @@ public class BaseApplication extends RePluginApplication {
 
         /*设置安装外置插件的时候是否移动源插件文件,true为允许移动*/
         c.setMoveFileWhenInstalling(false);
+
+        c.setPrintDetailLog(BuildConfig.DEBUG);
         return c;
     }
 
@@ -77,6 +80,7 @@ public class BaseApplication extends RePluginApplication {
             if(BuildConfig.DEBUG){
                 Log.d(TAG,"插件"+plugin+"中Acitivity:"+activity+"已启动完成,启动结果为:"+result);
             }
+            Toast.makeText(getApplicationContext(),"插件"+plugin+"中Acitivity:"+activity+"已启动完成,启动结果为:"+result,Toast.LENGTH_SHORT).show();
             super.onStartActivityCompleted(plugin, activity, result);
         }
 
