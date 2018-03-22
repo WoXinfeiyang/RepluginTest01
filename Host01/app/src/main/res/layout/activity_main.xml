@@ -83,6 +83,11 @@
                 android:id="@+id/btn_install_plugin03_from_assets"
                 style="@style/ButtonStyle"
                 android:text="install plugin03 from assets"/>
+
+            <Button
+                android:id="@+id/btn_get_all_plugins_info"
+                style="@style/ButtonStyle"
+                android:text="get all plugins info"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

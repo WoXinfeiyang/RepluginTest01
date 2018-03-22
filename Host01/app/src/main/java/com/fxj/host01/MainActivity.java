@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -185,6 +186,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.btn_get_all_plugins_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,getAllPluginInfo());
+                Toast.makeText(MainActivity.this,getAllPluginInfo(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private String getAllPluginInfo(){
+        StringBuilder sb=new StringBuilder();
+        sb.append("当前包含的插件有:");
+        ArrayList<PluginInfo>list= (ArrayList<PluginInfo>) RePlugin.getPluginInfoList();
+        for(PluginInfo info :list){
+            sb.append(info.getName()+" ");
+        }
+        return sb.toString();
     }
 
     /**
