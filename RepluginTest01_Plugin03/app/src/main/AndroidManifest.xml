@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 插件别名 -->
+        <meta-data
+            android:name="com.qihoo360.plugin.name"
+            android:value="plugin03" />
+
         <activity android:name="com.fxj.replugintest01_plugin03.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

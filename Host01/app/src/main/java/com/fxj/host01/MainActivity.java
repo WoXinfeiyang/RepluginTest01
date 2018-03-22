@@ -208,6 +208,7 @@ public class MainActivity extends Activity {
              if(info!=null){
                  Log.d(TAG,"位于Assets文件夹下的外置插件apk文件安装成功!PluginInfo:"+info);
                  Toast.makeText(MainActivity.this,"位于Assets文件夹下的外置插件apk文件安装成功!",Toast.LENGTH_SHORT).show();
+                 RePlugin.preload(info);
                  RePlugin.startActivity(MainActivity.this,RePlugin.createIntent("plugin03","com.fxj.replugintest01_plugin03.MainActivity"));
              }else{
                  Log.d(TAG,"位于Assets文件夹下的外置插件apk文件安装失败!");
