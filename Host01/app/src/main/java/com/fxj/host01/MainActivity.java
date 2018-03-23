@@ -151,7 +151,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        final String plugin02Name="plugin02.apk";
 
         findViewById(R.id.btn_install_plugin02_from_sd).setOnClickListener(new View.OnClickListener() {
 
