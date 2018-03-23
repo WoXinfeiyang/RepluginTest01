@@ -255,8 +255,12 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }finally {
             try {
-                is.close();
-                fos.close();
+                if(is!=null){
+                    is.close();
+                }
+                if(fos!=null){
+                    fos.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
